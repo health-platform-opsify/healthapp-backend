@@ -11,6 +11,6 @@ app = FastAPI(title="HealthApp Backend",
 
 
 @app.get("/healthz")
-def healthz():
+def healthz() -> dict[str, str]:
     return {"status": "ok"}
 

@@ -1,12 +1,13 @@
 import pytest
-from app.main import app
 from fastapi.testclient import TestClient
+from app.main import app
 
 @pytest.fixture
-def client():
+def client() -> TestClient:
+    """Create a test client for the FastAPI application."""
     return TestClient(app)
 
-def test_health_check(client):
+def test_health_check(client: TestClient) -> None:
     """Test the health check endpoint"""
     response = client.get("/health")
     assert response.status_code == 200
