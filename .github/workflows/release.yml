@@ -23,6 +23,9 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           context: .
+          # Explicitly specify the Dockerfile path relative to the context to
+          # avoid buildx accidentally picking the wrong (or missing) file.
+          file: ./Dockerfile
           push: true
           platforms: linux/amd64
           tags: |
