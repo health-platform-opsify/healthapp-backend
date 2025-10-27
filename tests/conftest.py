@@ -1,7 +1,6 @@
 import asyncio
-from typing import AsyncGenerator, Generator
+from typing import Generator
 import pytest
-import pytest_asyncio
 
 # Set the event loop fixture scope
 pytest.ini_options = {
