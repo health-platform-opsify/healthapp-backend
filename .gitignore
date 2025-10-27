@@ -1,0 +1,53 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+.envrc
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test and coverage
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+
+# Docker
+*.db
+*.sqlite3
+docker-compose.override.yml
+
+# Misc
+*.bak
+*.swp
+*.swo
+
+# Ignore secrets
+*.env
+secrets.json
+
+# Ignore build
+build/
+dist/
+*.egg-info/
+
+# Ignore requirements lock
+requirements*.lock
