@@ -16,7 +16,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
-        with: { registry: ghcr.io, username: ${{ github.actor }}, password: ${{ secrets.GITHUB_TOKEN }} }
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v6
         with:
           context: .
@@ -27,7 +30,9 @@ jobs:
             ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
           provenance: false
       - uses: anchore/sbom-action@v0
-        with: { image: ${{ env.IMAGE_NAME }}:latest, artifact-name: sbom-spdx.json }
+        with:
+          image: ${{ env.IMAGE_NAME }}:latest
+          artifact-name: sbom-spdx.json
       - uses: aquasecurity/trivy-action@0.24.0
         with:
           image-ref: ${{ env.IMAGE_NAME }}:latest
@@ -37,7 +42,8 @@ jobs:
           severity: 'CRITICAL,HIGH'
       - uses: sigstore/cosign-installer@v3.8.1
       - name: Sign (keyless)
-        env: { COSIGN_EXPERIMENTAL: "1" }
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign sign --yes ${{ env.IMAGE_NAME }}:latest
           cosign sign --yes ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
