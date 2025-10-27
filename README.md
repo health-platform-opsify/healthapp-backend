@@ -55,8 +55,10 @@ EXECUTE FUNCTION healthcare.set_updated_at();
 
 
 git init
-git add README.md
+git add .
 git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/health-platform-opsify/healthapp-backend.git
 git push -u origin main
+
+- trigger PR CI
