@@ -1,9 +1,15 @@
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import text
 from app.core.config import settings
 
-Base = declarative_base()
+class Base(DeclarativeBase):
+    """SQLAlchemy declarative base class that is valid as a type for mypy.
+
+    Using DeclarativeBase (SQLAlchemy 2.x) makes `Base` a proper class and
+    avoids mypy errors about "Variable ... Base not valid as a type".
+    """
+    pass
 
 engine = create_async_engine(
     settings.database_url,
@@ -20,7 +26,7 @@ SessionLocal = async_sessionmaker(
     class_=AsyncSession,
 )
 
-async def init_db():
+async def init_db() -> None:
     """
     Ensure schema exists and create tables in that schema.
     """
@@ -38,4 +44,4 @@ async def init_db():
             # if imports fail, proceed; create_all will only act on existing metadata
             pass
 
-        await conn.run_sync(Base.metadata.create_all)
+    await conn.run_sync(Base.metadata.create_all)

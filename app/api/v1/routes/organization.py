@@ -6,7 +6,8 @@ from app.services.organization_service import get_organizations
 
 router = APIRouter()
 
+
 @router.get("/organizations", response_model=List[OrganizationDTO])
-def list_organizations():
+def list_organizations() -> List[OrganizationDTO]:
     """Placeholder endpoint for organizations."""
     return get_organizations()

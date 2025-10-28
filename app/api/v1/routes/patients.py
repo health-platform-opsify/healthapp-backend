@@ -11,12 +11,15 @@ router = APIRouter()
 
 
 @router.get("/patients", response_model=List[PatientDTO])
-async def get_patients(q: str = Query(None, description="Search query for name or NHS number"), db: AsyncSession = Depends(get_db)):
+async def get_patients(
+    q: str = Query(None, description="Search query for name or NHS number"),
+    db: AsyncSession = Depends(get_db),
+) -> List[PatientDTO]:
     return await list_patients(db, q)
 
 
 @router.post("/patients", response_model=PatientDTO, status_code=201)
-async def post_patient(payload: PatientCreate = Body(...), db: AsyncSession = Depends(get_db)):
+async def post_patient(payload: PatientCreate = Body(...), db: AsyncSession = Depends(get_db)) -> PatientDTO:
     # basic validation example
     if not payload.name:
         raise HTTPException(status_code=422, detail="name is required")

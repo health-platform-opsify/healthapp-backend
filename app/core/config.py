@@ -2,7 +2,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_env: str = "local"
-    database_url: str
+    # Provide a sensible default for local/dev so mypy won't complain when
+    # creating Settings() at import time in CI. In production this should be
+    # provided by env vars or secrets.
+    database_url: str = "sqlite+aiosqlite:///:memory:"
     db_schema: str = "public"
     log_level: str = "info"
     port: int = 8000

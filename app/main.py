@@ -14,6 +14,6 @@ app.include_router(org_router, prefix="/api/v1", tags=["organizations"])
 app.include_router(patients_router, prefix="/api/v1", tags=["patients"])
 
 @app.get("/healthz")
-def healthz():
+def healthz() -> dict[str, str]:
     return {"status": "ok"}
 
