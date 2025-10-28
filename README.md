@@ -62,3 +62,14 @@ git remote add origin https://github.com/health-platform-opsify/healthapp-backen
 git push -u origin main
 
 - trigger PR CI
+
+
+python -m venv .venv
+.venv\Scripts\activate.bat
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+
+git add .
+git commit -m "feat(patients): basic CRUD endpoints and tests"
+git checkout -m feature/patients
+git push -u origin feature/patients
