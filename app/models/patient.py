@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, JSON, DateTime
 from sqlalchemy.sql import func
 from app.db.database import Base
+from app.core.config import settings
 
 
 class Patient(Base):
